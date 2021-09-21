@@ -13,7 +13,7 @@ def bad_fibo(n: int) -> int:
     if n < 2:
         return n
     else:
-        return bad_fibo(n - 1) + bad_fibo(n + 2)
+        return bad_fibo(n - 1) + bad_fibo(n - 2)
 
 
 @app.route("/get_slow_resource", methods=["GET"])
@@ -28,7 +28,7 @@ def fast():
 
 @app.route("/cpu_bound_resource", methods=["GET"])
 def stuck():
-    return str(bad_fibo(10))
+    return str(bad_fibo(32))
 
 
 if __name__ == "__main__":
