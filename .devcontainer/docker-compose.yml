@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  python_load_tester:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/opt/yijunx/code
+      - ~/etc/localtime:/opt/yijunx/etc/localtime
+      - ~/etc/timezone:/opt/yijunx/etc/timezone
+    command: ["tail -f /dev/null"]
+    # ports:
+    #   - 8000:8000
+    networks:
+      - default
+    # depends_on:
+    #   - db
+
+  resource_app:
+    image: yijunx/resource_app:0.0.2
+    ports:
+      - 5432:8000
+    networks:
+      - default
+
+#   pgadmin:
+#     image: dpage/pgadmin4:5.1
+#     environment:
+#       - PGADMIN_DEFAULT_EMAIL=pdadmin4@pdadmin.org
+#       - PGADMIN_DEFAULT_PASSWORD=admin
+#     ports:
+#       - 5050:80
+#     depends_on:
+#       - db
+#     networks:
+#       - default
+
+networks:
+  default:
+    external:
+      name: micro-services
