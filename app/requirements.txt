@@ -3,3 +3,4 @@ gunicorn
 requests
 gevent
 black
+aiohttp[speedups]
